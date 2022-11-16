@@ -200,6 +200,7 @@
     }
     return needResize;
   }
+  console.log("made an edit")
 
   //Listens for mouse movement, gets mouse position, then moves joints that have capped off
   // the angles they can move at. 
