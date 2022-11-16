@@ -8,7 +8,7 @@
     chest,                               // Reference to the Upperchest bone in the skeleton
     //   possibleAnims,                      // Animations found in our file
     mixer,                              // THREE.js animations mixer
-    //   idle,                               // Idle, the default state our character returns to
+    idle,                               // Idle, the default state our character returns to
     clock = new THREE.Clock(),          // Used for anims, which run to a clock instead of frame rate 
     currentlyAnimating = false,         // Used to check whether characters neck is being used in another anim
     raycaster = new THREE.Raycaster(),  // Used to detect the click on our character
@@ -116,12 +116,18 @@
    */
     // let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
     // hemiLight.position.set(0, 50, 0);
-
     // scene.add(hemiLight);
 
-    let d = 8.25;
-    let dirLight = new THREE.DirectionalLight(0xffffff, 4.54);
-    dirLight.position.set(-2, 3, 2);
+
+    const SpotLight = new THREE.SpotLight(0xffffff)
+    scene.add(SpotLight)
+    SpotLight.position.set(-100, 10, 0);
+    SpotLight.castShadow = true;
+    SpotLight.angle = 0.05;
+
+    let d = 9.25;
+    let dirLight = new THREE.DirectionalLight(0xffffff, 1.54);
+    dirLight.position.set(-2, 2.5, 2);
     dirLight.castShadow = true;
     dirLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
     dirLight.shadow.camera.near = 0.1;
@@ -133,11 +139,25 @@
     // Add directional Light to scene
     scene.add(dirLight);
 
+    let dirLight2 = new THREE.DirectionalLight(0xffffff, 1.4);
+    dirLight2.position.set(0, .5, 5);
+    scene.add(dirLight2)
+
+
+    const image = new Image()
+    const texture = new THREE.Texture(image);
+    image.onload = () => {
+      texture.needsUpdate = true
+    }
+    image.src = "./resources/woodleft.jpeg"
+
+
+
 
     // Floor
     let floorGeometry = new THREE.PlaneGeometry(40, 40, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
-      color: 0x1a0c04,
+      map: texture,
       shininess: 0,
     });
 
