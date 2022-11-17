@@ -103,8 +103,8 @@ body {
   top: 12em;
   left: -4em;
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   background-color: rgba(74, 68, 68, 0.307);
   color: rgba(255, 255, 255, 0.8);
@@ -126,7 +126,7 @@ body {
 /* INFO_text */
 .point .text {
   position: absolute;
-  top: 6em;
+  top: 7.5em;
   left: -24em;
   padding: 20px;
   text-align: center;
