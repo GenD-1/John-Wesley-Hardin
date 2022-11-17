@@ -98,7 +98,8 @@ body {
   opacity: 1;
 }
 
-/* INFO_icon_ByFoot */
+/* Sizing is Screwed, not one-to-one
+  with Vercel. Beware, push and test often */
 .point .label {
   top: 12em;
   left: -4em;
@@ -122,7 +123,8 @@ body {
   background-color: rgba(74, 68, 68, 0.793);
 }
 
-/* INFO_text */
+/* Sizing is Screwed, not one-to-one
+  with Vercel. Beware, push and test often */
 .point .text {
   position: absolute;
   top: 8em;
@@ -145,6 +147,8 @@ body {
   pointer-events: none;
 }
 
+/* Sizing is Screwed, not one-to-one
+  with Vercel. Beware, push and test often */
 
 #buttonleft {
   position: absolute;
@@ -199,6 +203,8 @@ body {
   src: url(fonts/RioGrande.ttf);
 }
 
+/* Sizing is Screwed, not one-to-one
+  with Vercel. Beware, push and test often */
 /* Header */
 .header_text {
   position: absolute;
