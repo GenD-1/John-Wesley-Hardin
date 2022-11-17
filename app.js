@@ -156,7 +156,7 @@
 
 
     // Floor
-    let floorGeometry = new THREE.PlaneGeometry(58, 40, 1, 1);
+    let floorGeometry = new THREE.PlaneGeometry(70, 40, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
       map: texture,
       shininess: 0,
