@@ -1,21 +1,52 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>I go Hardin the paint</title>
-        <link href="styles.css" rel="stylesheet">
-    </head> 
-    <body>
-        <!-- The loading element overlays all else until the model is loaded, at which point we remove this element from the DOM -->  
-<div class="loading" id="js-loader"><div class="loader"></div></div> 
-<div class="wrapper"> 
-     <!-- The canvas element is used to draw the 3D scene -->
-     <canvas id="c"></canvas>
-</div>    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>I go Hardin the paint</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!--Header Test/Example-->
+    <div class="header_text">
+        <h1>John Wesley Hardin</h1>
+    </div>
+
+    <!--Info Pointer Test/Example-->
+    <div class="point point-0">
+        <div class="label">?</div>
+        <div class="text">These 1843 handmade cowboy boots first belonged to Johns father, Tyji Hardin. After his
+            untimly death at the
+            whore house, they we're passed down to a six year old John. He wore them his whole life.</div>
+    </div>
+
+    <!--Button - Test/Example (Trigger Gsap X Camera Movement)-->
+    <form action="https://www.gendesign.ai">
+        <button id="buttonleft">Cast & Crew</button>
+    </form>
+
+    <form action="https://www.gendesign.ai">
+        <button id="buttonright">Hardin Synopsis</button>
+    </form>
+
+
+
+    <!-- The loading element overlays all else until the model is loaded, at which point we remove this element from the DOM -->
+    <div class="loading" id="js-loader">
+        <div class="loader"></div>
+    </div>
+    <div class="wrapper">
+        <canvas id="c"></canvas>
+    </div>
+
 
 </body>
+
 </html>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>

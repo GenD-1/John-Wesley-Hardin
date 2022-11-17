@@ -86,6 +86,8 @@
 
         model.scale.set(7, 7, 7)
         model.position.y = -11;
+        model.position.z = 7;
+
         scene.add(model)
       },
       undefined, // We don't need this function
@@ -93,7 +95,6 @@
         console.error(error);
       }
     );
-
 
 
     /**
@@ -125,7 +126,7 @@
     SpotLight.castShadow = true;
     SpotLight.angle = 0.05;
 
-    let d = 9.25;
+    let d = 13.25;
     let dirLight = new THREE.DirectionalLight(0xffffff, 1.54);
     dirLight.position.set(-2, 2.5, 2);
     dirLight.castShadow = true;
