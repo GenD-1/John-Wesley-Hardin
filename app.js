@@ -6,7 +6,7 @@
     model,                              // Our character
     head,                               // Reference to the head bone in the skeleton
     chest,                               // Reference to the Upperchest bone in the skeleton
-    //   possibleAnims,                      // Animations found in our file
+    possibleAnims,                      // Animations found in our file
     mixer,                              // THREE.js animations mixer
     idle,                               // Idle, the default state our character returns to
     clock = new THREE.Clock(),          // Used for anims, which run to a clock instead of frame rate 
@@ -56,12 +56,40 @@
     loader.load(
       MODEL_PATH,
       function (gltf) {
+        model = gltf.scene;
+
+        let fileAnimations = gltf.animations
+
         loaderAnim.remove();
+
         mixer = new THREE.AnimationMixer(model);
+
+        let clips = fileAnimations.filter(val => val.name !== 'idle');
+
+        possibleAnims = clips.map(val => {
+          let clip = THREE.AnimationClip.findByName(clips, val.name);
+          clip.tracks.splice(3, 3);
+          clip.tracks.splice(9, 3);
+          clip = mixer.clipAction(clip);
+          return clip;
+         }
+        );
+
+
+        const idleAnim = THREE.AnimationClip.findByName(fileAnimations, 'idle');
+
+
+        idleAnim.tracks.splice(3, 3);
+        idleAnim.tracks.splice(12, 3);
+
+        idle = mixer.clipAction(idleAnim);
+
+        idle.play()
+
 
         // A lot is going to happen here
         console.log(gltf)
-        model = gltf.scene;
+
 
         model.traverse(o => {
           if (o.isBone) {
@@ -186,7 +214,7 @@
     requestAnimationFrame(update);
   }
   update();
-
+console.log(scene)
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
     let width = window.innerWidth;
@@ -201,7 +229,62 @@
     }
     return needResize;
   }
-  console.log("made an edit")
+//Top event listener is for desktop and the bottom is for touchscreens
+  window.addEventListener('click', e => raycast(e));
+  window.addEventListener('touchend', e => raycast(e, true));
+  
+  function raycast(e, touch = false) {
+    var mouse = {};
+    if (touch) {
+      mouse.x = 2 * (e.changedTouches[0].clientX / window.innerWidth) - 1;
+      mouse.y = 1 - 2 * (e.changedTouches[0].clientY / window.innerHeight);
+    } else {
+      mouse.x = 2 * (e.clientX / window.innerWidth) - 1;
+      mouse.y = 1 - 2 * (e.clientY / window.innerHeight);
+    }
+    // update the picking ray with the camera and mouse position
+    raycaster.setFromCamera(mouse, camera);
+  
+    // calculate objects intersecting the picking ray
+    var intersects = raycaster.intersectObjects(scene.children, true);
+   console.log(scene.children)
+  
+    if (intersects[0]) {
+      var object = intersects[0].object;
+      console.log(scene)
+  
+      if (object.name === '') {
+  
+        if (!currentlyAnimating) {
+          currentlyAnimating = true;
+          playOnClick();
+        }
+      }
+    }
+  }
+  function playOnClick() {
+    let anim = Math.floor(Math.random() * possibleAnims.length) + 0;
+    playModifierAnimation(idle, 0.25, possibleAnims[anim], 0.25);
+  }
+//This blends the animation from idle to something else
+  function playModifierAnimation(from, fSpeed, to, tSpeed) {
+    //Reset the "to" animation. The animation that is about to play
+    to.setLoop(THREE.LoopOnce);
+    to.reset();
+    to.play();
+    //each clip action has a method cross fade too. Responsible for blending
+    from.crossFadeTo(to, fSpeed, true);
+
+    
+    setTimeout(function() {
+      //Return to idle
+      from.enabled = true;
+      //Crossfade to idle
+      to.crossFadeTo(from, tSpeed, true);
+      //Make current animation false again
+      currentlyAnimating = false;
+    }, to._clip.duration * 1000 - ((tSpeed + fSpeed) * 1000));
+  }
 
   //Listens for mouse movement, gets mouse position, then moves joints that have capped off
   // the angles they can move at. 
