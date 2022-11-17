@@ -150,7 +150,7 @@
     image.onload = () => {
       texture.needsUpdate = true
     }
-    image.src = "./resources/woodlong.jpg"
+    image.src = "./resources/woodextended.jpg"
 
 
 
