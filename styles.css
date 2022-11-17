@@ -3,6 +3,7 @@ html {
   margin: 0;
   padding: 0;
   background: #262643;
+  overflow: hidden
 }
 
 * {
@@ -27,7 +28,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden
 }
 
 #c {
