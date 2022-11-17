@@ -150,13 +150,13 @@
     image.onload = () => {
       texture.needsUpdate = true
     }
-    image.src = "./resources/woodleft.jpeg"
+    image.src = "./resources/woodlong.jpg"
 
 
 
 
     // Floor
-    let floorGeometry = new THREE.PlaneGeometry(80, 40, 1, 1);
+    let floorGeometry = new THREE.PlaneGeometry(58, 40, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
       map: texture,
       shininess: 0,
