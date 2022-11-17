@@ -100,7 +100,7 @@ body {
 
 /* INFO_icon_ByFoot */
 .point .label {
-  top: 15em;
+  top: 12em;
   left: -4em;
   position: absolute;
   width: 40px;
@@ -126,13 +126,13 @@ body {
 /* INFO_text */
 .point .text {
   position: absolute;
-  top: 9em;
+  top: 6em;
   left: -24em;
   padding: 20px;
   text-align: center;
   border: 4px solid black;
   border-radius: 10%;
-  width: 450px;
+  width: 350px;
   background-color: rgba(74, 68, 68, 0.6);
   color: white;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -140,7 +140,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 20px;
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
