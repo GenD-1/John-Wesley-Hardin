@@ -256,16 +256,19 @@ p {
 
   #buttonright {
     font-size: 1em;
-    top: 68%;
+    top: 65%;
     right: 2%;
     padding: 10px 10px;
+    border: none;
+
   }
 
   #buttonleft {
     font-size: 1em;
-    top: 68%;
+    top: 65%;
     left: 2%;
     padding: 10px 10px;
+    border: none;
   }
 
   .point .label {
@@ -273,20 +276,13 @@ p {
   }
 }
 
-
-
-
 /* Header Animation */
 h1,
-h2 {
+p {
   -webkit-animation: fadein 7s;
   animation: fadein 7s;
 }
 
-/* h2 {
-  -webkit-animation: fadein 9s;
-  animation: fadein 9s;
-} */
 
 @keyframes fadein {
   0% {
