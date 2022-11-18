@@ -211,14 +211,49 @@ body {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Riogrande', 'Nashville', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 3em;
-  font-weight: 20;
-  color: rgb(0, 0, 0)
+  margin-top: -1em;
+  text-align: center;
 }
+
+p {
+  font-size: 2.5em;
+  font-family: 'Riogrande', 'Nashville', 'Gill Sans MT', sans-serif;
+  margin-top: -2em;
+}
+
+.header_text h1 {
+  font-family: 'Riogrande', 'Nashville', 'Gill Sans MT', sans-serif;
+  font-size: 6.5em;
+  font-weight: 20;
+  color: rgb(0, 0, 0);
+}
+
+@media (max-width: 1050px) {
+  .header_text h1 {
+    font-size: 4.5em;
+  }
+
+  p {
+    font-size: 2em;
+    margin-top: -1.5em;
+  }
+}
+
+@media (max-width: 450px) {
+  .header_text h1 {
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1em;
+    margin-top: -1.5em;
+  }
+}
+
+
 
 
 /* Header Animation */
@@ -226,6 +261,11 @@ h1 {
   -webkit-animation: fadein 7s;
   animation: fadein 7s;
 }
+
+/* h2 {
+  -webkit-animation: fadein 9s;
+  animation: fadein 9s;
+} */
 
 @keyframes fadein {
   0% {
