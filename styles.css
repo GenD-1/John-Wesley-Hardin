@@ -257,14 +257,14 @@ p {
   #buttonright {
     font-size: 1em;
     top: 70%;
-    right: 8%;
+    right: 2%;
     padding: 10px 10px;
   }
 
   #buttonleft {
     font-size: 1em;
     top: 70%;
-    left: 8%;
+    left: 2%;
     padding: 10px 10px;
   }
 
