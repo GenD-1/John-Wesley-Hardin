@@ -272,7 +272,8 @@ p {
 
 
 /* Header Animation */
-h1 {
+h1,
+h2 {
   -webkit-animation: fadein 7s;
   animation: fadein 7s;
 }
