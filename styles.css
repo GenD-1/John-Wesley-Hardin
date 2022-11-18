@@ -256,7 +256,7 @@ p {
 
   #buttonright {
     font-size: 1em;
-    top: 33%;
+    top: 63%;
     right: 2%;
     padding: 10px 10px;
     border: none;
@@ -265,7 +265,7 @@ p {
 
   #buttonleft {
     font-size: 1em;
-    top: 33%;
+    top: 63%;
     left: 2%;
     padding: 10px 10px;
     border: none;
