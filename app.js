@@ -155,7 +155,7 @@
     })
 
     /**
-     * Camera Animation Right
+     * Camera Animation Right anim
      */
     const buttonR = $(".buttonRight");
     let buttonRight = false;
