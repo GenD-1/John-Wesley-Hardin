@@ -200,7 +200,7 @@
 
   }
 
-
+//Renderer & Animation?
   function update() {
     if (mixer) {
       mixer.update(clock.getDelta());
@@ -214,6 +214,7 @@
     requestAnimationFrame(update);
   }
   update();
+
 console.log(scene)
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -266,6 +267,8 @@ console.log(scene)
     let anim = Math.floor(Math.random() * possibleAnims.length) + 0;
     playModifierAnimation(idle, 0.25, possibleAnims[anim], 0.25);
   }
+
+  
 //This blends the animation from idle to something else
   function playModifierAnimation(from, fSpeed, to, tSpeed) {
     //Reset the "to" animation. The animation that is about to play
