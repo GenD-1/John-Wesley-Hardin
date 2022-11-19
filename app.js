@@ -45,7 +45,7 @@
     document.body.appendChild(renderer.domElement);
 
     /**
-     * Import the model  
+     * Import the Hardin Model  
      */
     // const MODEL_PATH = 'Hardin.glb'
     const MODEL_PATH = 'Hardin_Final_V1.glb'
@@ -85,13 +85,13 @@
 
 
         // A lot is going to happen here
-        console.log(gltf)
+        // console.log(gltf)
 
 
         model.traverse(o => {
           if (o.isBone) {
             //use the console log to find bones you want to move 
-            console.log(o.name);
+            // console.log(o.name);
           }
 
           if (o.isMesh) {
@@ -123,6 +123,26 @@
 
 
     /**
+      * WoodPanel_Model
+      */
+    loader.load(
+      '/info_stand.glb',
+      (infostand) => {
+        infomodel = infostand.scene;
+        // scene.add(infomodel.children[0])
+        infomodel.scale.set(6.5, 6.5, 6.5)
+        infomodel.position.z = 8
+        infomodel.position.y = -11
+        infomodel.position.x = 25.4
+
+        scene.add(infomodel)
+      }
+    );
+    // info.position.y = 5;
+
+
+
+    /**
        * Camera_Default
        */
     camera = new THREE.PerspectiveCamera(
@@ -132,9 +152,15 @@
       1000
     );
 
-    camera.position.z = 30;
+    //Default camera position, comment out when editing camera
+    camera.position.z = 32;
     camera.position.x = 0;
     camera.position.y = -3;
+
+    //Placement camera for model edits
+    // camera.position.z = 50;
+    // camera.position.x = 0;
+    // camera.position.y = -3;
 
     /**
        * Camera Animation Left
@@ -157,38 +183,30 @@
     /**
      * Camera Animation Right anim
      */
+    const tl = gsap.timeline()
+
     const buttonR = $(".buttonRight");
     let buttonRight = false;
 
     buttonR.click(() => {
       // camera.position.x = buttonLeft ? 0 : -30;
-      gsap.to(camera.position, {
+      tl.to(camera.position, {
         duration: 3,
         x: buttonRight ? 0 : 30,
         // ease: "power3.in"
-
       })
+
+      // .to(camera.position, {
+      //   duration: 3,
+      //   z: buttonRight ? 32 : 18,
+      //   y: buttonRight ? -3 : -2
+      //   // ease: "power3.in"
+      // })
+
       buttonR[0].innterHTML = buttonRight ? 'go right' : 'go back';
       buttonRight = !buttonRight;
+
     })
-
-
-
-
-    // console.log(gsap)
-    // let buttonLeft = document.getElementById("buttonleft");
-    // window.addEventListener("mousedown", function () {
-    //   gsap.to(camera.position, {
-    //     x: -30,
-    //     duration: 3.7
-    //   });
-    //   gsap.to(camera.position, {
-    //     x: 0,
-    //     duration: 3.7,
-    //     delay: 4
-    //   });
-    // });
-
 
     /**
    *Lighting
@@ -265,7 +283,7 @@
   }
   update();
 
-  console.log(scene)
+  // console.log(scene)
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
     let width = window.innerWidth;
@@ -298,11 +316,11 @@
 
     // calculate objects intersecting the picking ray
     var intersects = raycaster.intersectObjects(scene.children, true);
-    console.log(scene.children)
+    // console.log(scene.children)
 
     if (intersects[0]) {
       var object = intersects[0].object;
-      console.log(scene)
+      // console.log(scene)
 
       if (object.name === '') {
 
