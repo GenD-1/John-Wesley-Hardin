@@ -27,13 +27,9 @@
     </div>
 
     <!--Button - Test/Example (Trigger Gsap X Camera Movement)-->
-    <form action="https://www.gendesign.ai" method="get" target="_blank">
-        <button id="buttonleft">Cast & Crew</button>
-    </form>
+    <button id="buttonleft" class="buttonLeft">Cast & Crew</button>
 
-    <form action="https://www.gendesign.ai" method="get" target="_blank">
-        <button id="buttonright">Hardin Synopsis</button>
-    </form>
+    <button id="buttonright" class="buttonRight">Hardin Synopsis</button>
 
 
     <!-- The loading element overlays all else until the model is loaded, at which point we remove this element from the DOM -->
@@ -48,8 +44,10 @@
 </body>
 
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
 <!-- This brings in the ability to load custom 3D objects in the .gltf file format. Blender allows the ability to export to this format out the box -->
 <script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
