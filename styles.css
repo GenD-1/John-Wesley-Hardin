@@ -150,7 +150,7 @@ body {
 /* Sizing is Screwed, not one-to-one
   with Vercel. Beware, push and test often */
 
-#buttonleft {
+.buttonLeft {
   position: absolute;
   top: 50%;
   left: 10%;
@@ -167,11 +167,12 @@ body {
   font-weight: 1;
 }
 
-#buttonleft:hover {
+.buttonLeft:hover {
   color: white;
 }
 
-#buttonright {
+
+.buttonRight {
   position: absolute;
   top: 50%;
   right: 10%;
@@ -188,7 +189,7 @@ body {
   font-weight: 1;
 }
 
-#buttonright:hover {
+.buttonRight:hover {
   color: white;
 }
 
@@ -254,7 +255,7 @@ p {
     margin-top: -1.5em;
   }
 
-  #buttonright {
+  .buttonRight {
     font-size: 1em;
     top: 63%;
     right: 2%;
@@ -263,7 +264,7 @@ p {
     color: white;
   }
 
-  #buttonleft {
+  .buttonLeft {
     font-size: 1em;
     top: 63%;
     left: 2%;
