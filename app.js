@@ -1,3 +1,4 @@
+
 (function () {
   // Set our main variables
   let scene,
@@ -26,8 +27,6 @@
     scene = new THREE.Scene();
     // scene.background = new THREE.Color(backgroundColor)
     // scene.fog = new THREE.Fog(0xdeb773, 1, 100)
-
-
     const loaders = new THREE.CubeTextureLoader();
     const textures = loaders.load([
       './resources/posx.jpg',
@@ -51,8 +50,6 @@
     // const MODEL_PATH = 'Hardin.glb'
     const MODEL_PATH = 'Hardin_Final_V1.glb'
     const loader = new THREE.GLTFLoader();
-
-
     loader.load(
       MODEL_PATH,
       function (gltf) {
@@ -72,7 +69,7 @@
           clip.tracks.splice(9, 3);
           clip = mixer.clipAction(clip);
           return clip;
-         }
+        }
         );
 
 
@@ -126,7 +123,7 @@
 
 
     /**
-       * Camera
+       * Camera_Default
        */
     camera = new THREE.PerspectiveCamera(
       50,
@@ -138,6 +135,59 @@
     camera.position.z = 30;
     camera.position.x = 0;
     camera.position.y = -3;
+
+    /**
+       * Camera Animation Left
+       */
+    const buttonL = $(".buttonLeft");
+    let buttonLeft = false;
+
+    buttonL.click(() => {
+      // camera.position.x = buttonLeft ? 0 : -30;
+      gsap.to(camera.position, {
+        duration: 3,
+        x: buttonLeft ? 0 : -30,
+        // ease: "power3.in"
+
+      })
+      buttonL[0].innterHTML = buttonLeft ? 'go left' : 'go back';
+      buttonLeft = !buttonLeft;
+    })
+
+    /**
+     * Camera Animation Right anim
+     */
+    const buttonR = $(".buttonRight");
+    let buttonRight = false;
+
+    buttonR.click(() => {
+      // camera.position.x = buttonLeft ? 0 : -30;
+      gsap.to(camera.position, {
+        duration: 3,
+        x: buttonRight ? 0 : 30,
+        // ease: "power3.in"
+
+      })
+      buttonR[0].innterHTML = buttonRight ? 'go right' : 'go back';
+      buttonRight = !buttonRight;
+    })
+
+
+
+
+    // console.log(gsap)
+    // let buttonLeft = document.getElementById("buttonleft");
+    // window.addEventListener("mousedown", function () {
+    //   gsap.to(camera.position, {
+    //     x: -30,
+    //     duration: 3.7
+    //   });
+    //   gsap.to(camera.position, {
+    //     x: 0,
+    //     duration: 3.7,
+    //     delay: 4
+    //   });
+    // });
 
 
     /**
@@ -178,13 +228,13 @@
     image.onload = () => {
       texture.needsUpdate = true
     }
-    image.src = "./resources/woodextended.jpg"
+    image.src = "./resources/floor_wood.jpg"
 
 
 
 
     // Floor
-    let floorGeometry = new THREE.PlaneGeometry(70, 40, 1, 1);
+    let floorGeometry = new THREE.PlaneGeometry(180, 40, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
       map: texture,
       shininess: 0,
@@ -200,7 +250,7 @@
 
   }
 
-//Renderer & Animation?
+  //Renderer & Animation?
   function update() {
     if (mixer) {
       mixer.update(clock.getDelta());
@@ -215,7 +265,7 @@
   }
   update();
 
-console.log(scene)
+  console.log(scene)
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
     let width = window.innerWidth;
@@ -230,10 +280,10 @@ console.log(scene)
     }
     return needResize;
   }
-//Top event listener is for desktop and the bottom is for touchscreens
+  //Top event listener is for desktop and the bottom is for touchscreens
   window.addEventListener('click', e => raycast(e));
   window.addEventListener('touchend', e => raycast(e, true));
-  
+
   function raycast(e, touch = false) {
     var mouse = {};
     if (touch) {
@@ -245,17 +295,17 @@ console.log(scene)
     }
     // update the picking ray with the camera and mouse position
     raycaster.setFromCamera(mouse, camera);
-  
+
     // calculate objects intersecting the picking ray
     var intersects = raycaster.intersectObjects(scene.children, true);
-   console.log(scene.children)
-  
+    console.log(scene.children)
+
     if (intersects[0]) {
       var object = intersects[0].object;
       console.log(scene)
-  
+
       if (object.name === '') {
-  
+
         if (!currentlyAnimating) {
           currentlyAnimating = true;
           playOnClick();
@@ -268,8 +318,8 @@ console.log(scene)
     playModifierAnimation(idle, 0.25, possibleAnims[anim], 0.25);
   }
 
-  
-//This blends the animation from idle to something else
+
+  //This blends the animation from idle to something else
   function playModifierAnimation(from, fSpeed, to, tSpeed) {
     //Reset the "to" animation. The animation that is about to play
     to.setLoop(THREE.LoopOnce);
@@ -278,8 +328,8 @@ console.log(scene)
     //each clip action has a method cross fade too. Responsible for blending
     from.crossFadeTo(to, fSpeed, true);
 
-    
-    setTimeout(function() {
+
+    setTimeout(function () {
       //Return to idle
       from.enabled = true;
       //Crossfade to idle
