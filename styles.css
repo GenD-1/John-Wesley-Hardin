@@ -273,28 +273,28 @@ p {
     font-size: 1em;
     top: 50%;
     right: 2%;
-    width: 12%;
+    width: 15%;
     padding: 15px 5px;
     border: none;
     color: white;
-    font-size: 1.3em;
+    font-size: 1em;
   }
 
   .buttonLeft {
     font-size: 1em;
     top: 50%;
     left: 2%;
-    width: 12%;
+    width: 15%;
     padding: 15px 5px;
     border: none;
     color: white;
-    font-size: 1.3em;
+    font-size: 1em;
 
   }
 
   .buttonHome {
     top: 90%;
-    left: 40%;
+    left: 37%;
   }
 
   .point .label {
