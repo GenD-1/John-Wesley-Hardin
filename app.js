@@ -181,7 +181,7 @@
 
 
     /**
-       * Camera Animation Left
+       * Camera Animation Page Left
        */
     const buttonL = $(".buttonLeft");
     let buttonLeft = false;
@@ -202,7 +202,7 @@
 
 
     /**
-     * Camera Animation Right anim
+     * Camera Animation Page Right
      */
     const tl = gsap.timeline()
 
@@ -229,25 +229,39 @@
       // buttonR[0].innerHTML = style.display = 'none';
     });
 
+
     /**
-    * Camera AnimationHome
+    * Camera_Animation_Home
     */
     const tl2 = gsap.timeline()
-    const buttonH = $(".buttonHome");
+    const buttonLhome = $(".buttonHomeleft");
     if (camera.position);
-    let buttonHome = false;
-    buttonH.click(() => {
+    let buttonHomeleft = false;
+    buttonLhome.click(() => {
       tl2.to(camera.position, {
         duration: 1,
-        z: buttonHome ? 14 : 32,
-        y: buttonHome ? -2.4 : -3
+        z: buttonHomeleft ? 14 : 32,
+        y: buttonHomeleft ? -2.4 : -3
       })
         .to(camera.position, {
           duration: 2,
-          x: buttonHome ? 30 : 0,
+          x: buttonHomeleft ? 30 : 0,
         })
-      buttonHome = !buttonHome;
+      buttonHomeleft = !buttonHomeleft;
     });
+
+    const tl3 = gsap.timeline()
+    const buttonR_home = $(".buttonHomeright");
+    if (camera.position);
+    let buttonHomeright = false;
+    buttonR_home.click(() => {
+      tl3.to(camera.position, {
+        duration: 3,
+        x: buttonHomeright ? -30 : 0,
+      })
+      buttonHomeright = !buttonHomeright;
+    });
+
 
 
     //ShowHide--- ButtonHome
@@ -270,16 +284,26 @@
         homepage.style.display = 'none';
       }
     })
-    //ShowHide--- HomeButton
-    // const toggleH = document.querySelector('.buttonHome')
-    // const homebutton = document.querySelector('#pageright')
-    // toggleH.addEventListener('click', () => {
-    //   if (homebutton.style.display === 'none') {
-    //     homebutton.style.display = 'block';
-    //   } else {
-    //     homebutton.style.display = 'none';
-    //   }
-    // })
+
+    // ShowHide-- - HomeButton
+    // const toggleR_home = document.querySelector('.buttonHomeright')
+    const rightbutton_home = document.querySelector('.buttonHomeright')
+    toggleR.addEventListener('click', () => {
+      if (rightbutton_home.style.display === 'none') {
+        rightbutton_home.style.display = 'block';
+      } else {
+        rightbutton_home.style.display = 'none';
+      }
+    })
+    const leftbutton_home = document.querySelector('.buttonHomeleft')
+    toggleL.addEventListener('click', () => {
+      if (leftbutton_home.style.display === 'none') {
+        leftbutton_home.style.display = 'block';
+      } else {
+        leftbutton_home.style.display = 'none';
+      }
+    })
+
 
 
 
