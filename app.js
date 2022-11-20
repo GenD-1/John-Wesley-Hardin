@@ -213,6 +213,7 @@
     */
     const tl2 = gsap.timeline()
     const buttonH = $(".buttonHome");
+    if (camera.position);
     let buttonHome = false;
     buttonH.click(() => {
       tl2.to(camera.position, {
