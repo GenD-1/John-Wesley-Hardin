@@ -151,16 +151,15 @@
       0.1,
       1000
     );
-
     //Default camera position, comment out when editing camera
     camera.position.z = 32;
     camera.position.x = 0;
     camera.position.y = -3;
-
     //Placement camera for model edits
     // camera.position.z = 50;
     // camera.position.x = 0;
     // camera.position.y = -3;
+
 
     /**
        * Camera Animation Left
@@ -180,6 +179,7 @@
       buttonLeft = !buttonLeft;
     })
 
+
     /**
      * Camera Animation Right anim
      */
@@ -191,22 +191,75 @@
     buttonR.click(() => {
       // camera.position.x = buttonLeft ? 0 : -30;
       tl.to(camera.position, {
-        duration: 3,
+        duration: 2.5,
         x: buttonRight ? 0 : 30,
         // ease: "power3.in"
       })
 
-      // .to(camera.position, {
-      //   duration: 3,
-      //   z: buttonRight ? 32 : 18,
-      //   y: buttonRight ? -3 : -2
-      //   // ease: "power3.in"
-      // })
+        .to(camera.position, {
+          duration: 2,
+          z: buttonRight ? 32 : 14,
+          y: buttonRight ? -3 : -2.4
+          // ease: "power3.in"
+        })
 
       buttonR[0].innterHTML = buttonRight ? 'go right' : 'go back';
       buttonRight = !buttonRight;
+      // buttonR[0].innerHTML = style.display = 'none';
+    });
 
+    /**
+    * Camera AnimationHome
+    */
+    const tl2 = gsap.timeline()
+    const buttonH = $(".buttonHome");
+    let buttonHome = false;
+    buttonH.click(() => {
+      tl2.to(camera.position, {
+        duration: 1,
+        z: buttonHome ? 14 : 32,
+        y: buttonHome ? -2.4 : -3
+      })
+        .to(camera.position, {
+          duration: 2,
+          x: buttonHome ? 30 : 0,
+        })
+      buttonHome = !buttonHome;
+    });
+
+
+    //ShowHide--- ButtonHome
+    const toggleR = document.querySelector('.buttonRight')
+    const toggleL = document.querySelector('.buttonLeft')
+    const homepage = document.querySelector('#homepage')
+    //ShowHide--- RightButton
+    toggleR.addEventListener('click', () => {
+      if (homepage.style.display === 'none') {
+        homepage.style.display = 'block';
+      } else {
+        homepage.style.display = 'none';
+      }
     })
+    //ShowHide--- LeftButton
+    toggleL.addEventListener('click', () => {
+      if (homepage.style.display === 'none') {
+        homepage.style.display = 'block';
+      } else {
+        homepage.style.display = 'none';
+      }
+    })
+    //ShowHide--- HomeButton
+    // const toggleH = document.querySelector('.buttonHome')
+    // const homebutton = document.querySelector('#pageright')
+    // toggleH.addEventListener('click', () => {
+    //   if (homebutton.style.display === 'none') {
+    //     homebutton.style.display = 'block';
+    //   } else {
+    //     homebutton.style.display = 'none';
+    //   }
+    // })
+
+
 
     /**
    *Lighting
@@ -214,7 +267,6 @@
     // let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
     // hemiLight.position.set(0, 50, 0);
     // scene.add(hemiLight);
-
 
     const SpotLight = new THREE.SpotLight(0xffffff)
     scene.add(SpotLight)

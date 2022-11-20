@@ -15,24 +15,34 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!--Header Test/Example-->
-    <div class="header_text">
-        <h1>John Wesley Hardin</h1>
-        <p>Presented By Galactic Pictures</p>
-    </div>
 
-    <!--Info Pointer Test/Example-->
-    <div class="point point-0">
-        <div class="label">?</div>
-        <div class="text">These 1843 handmade cowboy boots first belonged to Johns father, Tyji Hardin. After his
-            untimly death at the local
-            whore house, they we're passed down to a six year old John.</div>
-    </div>
 
-    <!--Button - Test/Example (Trigger Gsap X Camera Movement)-->
-    <button id="buttonleft" class="buttonLeft">Cast & Crew</button>
+    <section id="homepage">
+        <!--Header-->
+        <div class="header_text">
+            <h1>John Wesley Hardin</h1>
+            <p>Presented By Galactic Pictures</p>
+        </div>
 
-    <button id="buttonright" class="buttonRight">Hardin Synopsis</button>
+        <!--Info Pointer Test-->
+        <div class="point point-0 visible">
+            <div class="label">?</div>
+            <div class="text">
+                These 1843 handmade cowboy boots first belonged to Johns father, Tyji Hardin. After his
+                untimly death at the local
+                whore house, they we're passed down to a six year old John.
+            </div>
+        </div>
+        <!--Buttons - Home Page-->
+        <button id="buttonleft" class="buttonLeft">Cast & Crew</button>
+        <button id="buttonright" class="buttonRight">Hardin Synopsis</button>
+    </section>
+
+    <section id="pageright">
+        <button class="buttonHome">Go Home</button>
+    </section>
+
+
 
 
     <!-- The loading element overlays all else until the model is loaded, at which point we remove this element from the DOM -->
