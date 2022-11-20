@@ -292,13 +292,15 @@ p {
 
   }
 
+  .buttonHome {
+    top: 90%;
+    left: 40%;
+  }
+
   .point .label {
     display: none;
   }
 
-  .buttonHome {
-    left: 42.5%;
-  }
 }
 
 /* Header Animation */
