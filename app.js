@@ -49,7 +49,11 @@
      */
     // const MODEL_PATH = 'Hardin.glb'
     const MODEL_PATH = 'Hardin_Final_V1.glb'
-    const loader = new THREE.GLTFLoader();
+    const MODEL_PATH2 = 'saloon-v1.glb';
+    const manager = new THREE.LoadingManager();
+    // manager.onLoad = () => animate(); 
+    const loader = new THREE.GLTFLoader(manager);
+
     loader.load(
       MODEL_PATH,
       function (gltf) {
@@ -119,8 +123,23 @@
       function (error) {
         console.error(error);
       }
-    );
+    );  
+    
+    /**
+    *Saloon_Model
+    */
 
+    loader.load(MODEL_PATH2, function(gltf){
+      console.log(gltf)
+      saloon = gltf.scene
+      saloon.scale.set(.2,.2,.2)
+      saloon.position.x=-35;
+      saloon.position.y=-11;
+      saloon.position.z=-12;
+      saloon.rotation.y = Math.PI/2;
+      scene.add(saloon);
+
+    })
 
     /**
       * WoodPanel_Model
@@ -166,6 +185,7 @@
        */
     const buttonL = $(".buttonLeft");
     let buttonLeft = false;
+    console.log(buttonL)
 
     buttonL.click(() => {
       // camera.position.x = buttonLeft ? 0 : -30;
@@ -175,7 +195,8 @@
         // ease: "power3.in"
 
       })
-      buttonL[0].innterHTML = buttonLeft ? 'go left' : 'go back';
+      
+      buttonL[0].innerHTML = buttonLeft ? 'go left' : 'go back';
       buttonLeft = !buttonLeft;
     })
 
@@ -203,7 +224,7 @@
           // ease: "power3.in"
         })
 
-      buttonR[0].innterHTML = buttonRight ? 'go right' : 'go back';
+      buttonR[0].innerHTML = buttonRight ? 'go right' : 'go back';
       buttonRight = !buttonRight;
       // buttonR[0].innerHTML = style.display = 'none';
     });
@@ -305,11 +326,13 @@
 
 
     // Floor
-    let floorGeometry = new THREE.PlaneGeometry(180, 40, 1, 1);
+    let floorGeometry = new THREE.PlaneGeometry(180, 90, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
       map: texture,
       shininess: 0,
     });
+
+ 
 
     let floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.rotation.x = -0.5 * Math.PI; // This is 90 degrees by the way
@@ -317,6 +340,10 @@
     floor.position.y = -11;
     floor.position.z = 8;
     scene.add(floor);
+    
+    let floor2 = new THREE.Mesh(floorGeometry, floorMaterial);
+    floor2.rotation.x = -Math.PI/2
+    // scene.add(floor2)
 
 
   }
