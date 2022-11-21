@@ -13,7 +13,10 @@
     clock = new THREE.Clock(),          // Used for anims, which run to a clock instead of frame rate 
     currentlyAnimating = false,         // Used to check whether characters neck is being used in another anim
     raycaster = new THREE.Raycaster(),  // Used to detect the click on our character
-    loaderAnim = document.getElementById('js-loader');
+    loaderAnim = document.getElementById('js-loader'),
+    rightpage,
+    homepage,
+    leftpage
 
   init();
 
@@ -196,7 +199,7 @@
 
       })
       
-      buttonL[0].innerHTML = buttonLeft ? 'go left' : 'go back';
+      // buttonL[0].innerHTML = buttonLeft ? 'go left' : 'go back';
       buttonLeft = !buttonLeft;
     })
 
@@ -224,7 +227,7 @@
           // ease: "power3.in"
         })
 
-      buttonR[0].innerHTML = buttonRight ? 'go right' : 'go back';
+      // buttonR[0].innerHTML = buttonRight ? 'go right' : 'go back';
       buttonRight = !buttonRight;
       // buttonR[0].innerHTML = style.display = 'none';
     });
@@ -267,42 +270,49 @@
     //ShowHide--- ButtonHome
     const toggleR = document.querySelector('.buttonRight')
     const toggleL = document.querySelector('.buttonLeft')
-    const homepage = document.querySelector('#homepage')
+     homepage = document.querySelector('#homepage')
+     rightpage = document.querySelector('#pageright')
+     leftpage = document.querySelector('#pageleft')
+     console.dir(homepage)
+
+  
+
+
     //ShowHide--- RightButton
-    toggleR.addEventListener('click', () => {
-      if (homepage.style.display === 'none') {
-        homepage.style.display = 'block';
-      } else {
-        homepage.style.display = 'none';
-      }
-    })
+    // toggleR.addEventListener('click', () => {
+    //   if (homepage.style.display === 'none') {
+    //     homepage.style.display = 'block';
+    //   } else {
+    //     homepage.style.display = 'none';
+    //   }
+    // })
     //ShowHide--- LeftButton
-    toggleL.addEventListener('click', () => {
-      if (homepage.style.display === 'none') {
-        homepage.style.display = 'block';
-      } else {
-        homepage.style.display = 'none';
-      }
-    })
+    // toggleL.addEventListener('click', () => {
+    //   if (homepage.style.display === 'none') {
+    //     homepage.style.display = 'block';
+    //   } else {
+    //     homepage.style.display = 'none';
+    //   }
+    // })
 
     // ShowHide-- - HomeButton
     // const toggleR_home = document.querySelector('.buttonHomeright')
     const rightbutton_home = document.querySelector('.buttonHomeright')
-    toggleR.addEventListener('click', () => {
-      if (rightbutton_home.style.display === 'none') {
-        rightbutton_home.style.display = 'block';
-      } else {
-        rightbutton_home.style.display = 'none';
-      }
-    })
-    const leftbutton_home = document.querySelector('.buttonHomeleft')
-    toggleL.addEventListener('click', () => {
-      if (leftbutton_home.style.display === 'none') {
-        leftbutton_home.style.display = 'block';
-      } else {
-        leftbutton_home.style.display = 'none';
-      }
-    })
+    // toggleR.addEventListener('click', () => {
+    //   if (rightbutton_home.style.display === 'none') {
+    //     rightbutton_home.style.display = 'block';
+    //   } else {
+    //     rightbutton_home.style.display = 'none';
+    //   }
+    // })
+    // const leftbutton_home = document.querySelector('.buttonHomeleft')
+    // toggleL.addEventListener('click', () => {
+    //   if (leftbutton_home.style.display === 'none') {
+    //     leftbutton_home.style.display = 'block';
+    //   } else {
+    //     leftbutton_home.style.display = 'none';
+    //   }
+    // })
 
 
 
@@ -374,6 +384,29 @@
 
   //Renderer & Animation?
   function update() {
+
+    //When camera position is in between 1 and -1 have home page section revealed and hide rightpage and leftpage html elements
+    if(camera.position.x < 1 && camera.position.x > -1 ){
+
+      homepage.style.display = "";
+      rightpage.style.display= "none"
+      leftpage.style.display= "none"
+    }
+    if(camera.position.x > 1 ){
+
+      rightpage.style.display= "block"
+      homepage.style.display = "none";
+      leftpage.style.display="none"
+    }
+    if(camera.position.x < -1 ){
+
+      leftpage.style.display="block"
+      homepage.style.display = "none";
+      rightpage.style.display= "none"
+      
+    }
+
+
     if (mixer) {
       mixer.update(clock.getDelta());
     }

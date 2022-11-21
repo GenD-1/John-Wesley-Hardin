@@ -39,6 +39,8 @@ body {
   display: block;
 }
 
+
+
 .loading {
   position: fixed;
   z-index: 50;
@@ -323,7 +325,13 @@ p {
   }
 }
 
-;
+#pageright{
+  display: none;
+}
+#pageleft{
+  display: none;
+}
+
 
 /* Header Animation */
 h1,
