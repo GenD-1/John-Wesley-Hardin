@@ -39,8 +39,6 @@ body {
   display: block;
 }
 
-
-
 .loading {
   position: fixed;
   z-index: 50;
@@ -325,17 +323,13 @@ p {
   }
 }
 
-#pageright{
-  display: none;
-}
-#pageleft{
+#pageleft {
   display: none;
 }
 
 
 /* Header Animation */
-h1,
-p {
+.header_text {
   -webkit-animation: fadein 7s;
   animation: fadein 7s;
 }

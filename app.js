@@ -111,20 +111,20 @@
       function (error) {
         console.error(error);
       }
-    );  
-    
+    );
+
     /**
     *Saloon_Model
     */
     const MODEL_PATH2 = 'saloon-v1.glb';
-    loader.load(MODEL_PATH2, function(gltf){
+    loader.load(MODEL_PATH2, function (gltf) {
       console.log(gltf)
       saloon = gltf.scene
-      saloon.scale.set(.2,.2,.2)
-      saloon.position.x=-35;
-      saloon.position.y=-11;
-      saloon.position.z=-12;
-      saloon.rotation.y = Math.PI/2;
+      saloon.scale.set(.2, .2, .2)
+      saloon.position.x = -35;
+      saloon.position.y = -11;
+      saloon.position.z = -12;
+      saloon.rotation.y = Math.PI / 2;
       scene.add(saloon);
 
     })
@@ -182,7 +182,7 @@
         // ease: "power3.in"
 
       })
-      
+
       // buttonL[0].innerHTML = buttonLeft ? 'go left' : 'go back';
       buttonLeft = !buttonLeft;
     })
@@ -206,7 +206,8 @@
 
         .to(camera.position, {
           duration: 2,
-          z: buttonRight ? 32 : 14,
+          ease: "power4.out",
+          z: buttonRight ? 32 : 12,
           y: buttonRight ? -3 : -2.4
           // ease: "power3.in"
         })
@@ -227,7 +228,7 @@
     buttonLhome.click(() => {
       tl2.to(camera.position, {
         duration: 1,
-        z: buttonHomeleft ? 14 : 32,
+        z: buttonHomeleft ? 12 : 32,
         y: buttonHomeleft ? -2.4 : -3
       })
         .to(camera.position, {
@@ -254,11 +255,6 @@
     //ShowHide--- ButtonHome
     // const toggleR = document.querySelector('.buttonRight')
     // const toggleL = document.querySelector('.buttonLeft')
-   
-
-
-  
-
 
     //ShowHide--- RightButton
     // toggleR.addEventListener('click', () => {
@@ -348,7 +344,7 @@
       shininess: 0,
     });
 
- 
+
 
     let floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.rotation.x = -0.5 * Math.PI; // This is 90 degrees by the way
@@ -356,9 +352,9 @@
     floor.position.y = -11;
     floor.position.z = 8;
     scene.add(floor);
-    
+
     let floor2 = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor2.rotation.x = -Math.PI/2
+    floor2.rotation.x = -Math.PI / 2
     // scene.add(floor2)
 
 
@@ -373,27 +369,36 @@
 
   //Renderer & Animation?
   function update() {
-/**
- * Hide and reveal section elements inside the update function. Since update function ran every frame it can check camera position. 
- */
-    if(camera.position.x < 1 && camera.position.x > -1 ){
+    /**
+     *     if (camera.position.x >= 30 && camera.position.z < 13) {
 
-      homepage.style.display = "";
-      rightpage.style.display= "none"
-      leftpage.style.display= "none"
+     * Hide and reveal section elements inside the update function. Since update function ran every frame it can check camera position. 
+     */
+    if (camera.position.x < 1 && camera.position.x > -1) {
+
+      homepage.style.display = "block";
+      rightpage.style.display = "none"
+      leftpage.style.display = "none"
     }
-    if(camera.position.x > 1 ){
-
-      rightpage.style.display= "block"
+    else {
       homepage.style.display = "none";
-      leftpage.style.display="none"
     }
-    if(camera.position.x < -1 ){
-
-      leftpage.style.display="block"
+    if (camera.position.x > 1 && camera.position.z < 15) {
+      rightpage.style.display = "block"
       homepage.style.display = "none";
-      rightpage.style.display= "none"
-      
+      leftpage.style.display = "none"
+    }
+    else {
+      rightpage.style.display = "none"
+
+    }
+
+    if (camera.position.x < -1) {
+
+      leftpage.style.display = "block"
+      homepage.style.display = "none";
+      rightpage.style.display = "none"
+
     }
 
 
