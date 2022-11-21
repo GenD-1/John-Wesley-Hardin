@@ -58,7 +58,8 @@
 }
 
 
-.storysite-content {
+.storysite-content,
+.buttonHomeleft {
     -webkit-animation: fadein 2s;
     animation: fadein 2s;
 }
@@ -66,9 +67,8 @@
 @media (max-width: 700px) {
 
     .storysite-content {
-        width: 90%;
-        height: 75vh;
-        margin-bottom: 10em;
+        width: 95%;
+        height: 95vh;
     }
 
     .head {
