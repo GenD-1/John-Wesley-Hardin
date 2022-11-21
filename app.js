@@ -14,8 +14,8 @@
     currentlyAnimating = false,         // Used to check whether characters neck is being used in another anim
     raycaster = new THREE.Raycaster(),  // Used to detect the click on our character
     loaderAnim = document.getElementById('js-loader'),
-    rightpage,
-    homepage,
+    rightpage,                          //Section element representing HTML elements on rightpage
+    homepage,                           //Section element representing HTML elements on leftpage
     leftpage
 
   init();
@@ -50,26 +50,20 @@
     /**
      * Import the Hardin Model  
      */
-    // const MODEL_PATH = 'Hardin.glb'
+
     const MODEL_PATH = 'Hardin_Final_V1.glb'
-    const MODEL_PATH2 = 'saloon-v1.glb';
     const manager = new THREE.LoadingManager();
-    // manager.onLoad = () => animate(); 
     const loader = new THREE.GLTFLoader(manager);
+
 
     loader.load(
       MODEL_PATH,
       function (gltf) {
         model = gltf.scene;
-
         let fileAnimations = gltf.animations
-
         loaderAnim.remove();
-
         mixer = new THREE.AnimationMixer(model);
-
         let clips = fileAnimations.filter(val => val.name !== 'idle');
-
         possibleAnims = clips.map(val => {
           let clip = THREE.AnimationClip.findByName(clips, val.name);
           clip.tracks.splice(3, 3);
@@ -79,21 +73,13 @@
         }
         );
 
-
         const idleAnim = THREE.AnimationClip.findByName(fileAnimations, 'idle');
-
 
         idleAnim.tracks.splice(3, 3);
         idleAnim.tracks.splice(12, 3);
-
         idle = mixer.clipAction(idleAnim);
 
         idle.play()
-
-
-        // A lot is going to happen here
-        // console.log(gltf)
-
 
         model.traverse(o => {
           if (o.isBone) {
@@ -115,7 +101,6 @@
           }
         });
 
-
         model.scale.set(7, 7, 7)
         model.position.y = -11;
         model.position.z = 7;
@@ -131,7 +116,7 @@
     /**
     *Saloon_Model
     */
-
+    const MODEL_PATH2 = 'saloon-v1.glb';
     loader.load(MODEL_PATH2, function(gltf){
       console.log(gltf)
       saloon = gltf.scene
@@ -161,7 +146,6 @@
       }
     );
     // info.position.y = 5;
-
 
 
     /**
@@ -268,12 +252,10 @@
 
 
     //ShowHide--- ButtonHome
-    const toggleR = document.querySelector('.buttonRight')
-    const toggleL = document.querySelector('.buttonLeft')
-     homepage = document.querySelector('#homepage')
-     rightpage = document.querySelector('#pageright')
-     leftpage = document.querySelector('#pageleft')
-     console.dir(homepage)
+    // const toggleR = document.querySelector('.buttonRight')
+    // const toggleL = document.querySelector('.buttonLeft')
+   
+
 
   
 
@@ -297,7 +279,7 @@
 
     // ShowHide-- - HomeButton
     // const toggleR_home = document.querySelector('.buttonHomeright')
-    const rightbutton_home = document.querySelector('.buttonHomeright')
+    // const rightbutton_home = document.querySelector('.buttonHomeright')
     // toggleR.addEventListener('click', () => {
     //   if (rightbutton_home.style.display === 'none') {
     //     rightbutton_home.style.display = 'block';
@@ -382,10 +364,18 @@
 
   }
 
+  /**
+ *Select HTML elements representing each page of the site
+ */
+  homepage = document.querySelector('#homepage')
+  rightpage = document.querySelector('#pageright')
+  leftpage = document.querySelector('#pageleft')
+
   //Renderer & Animation?
   function update() {
-
-    //When camera position is in between 1 and -1 have home page section revealed and hide rightpage and leftpage html elements
+/**
+ * Hide and reveal section elements inside the update function. Since update function ran every frame it can check camera position. 
+ */
     if(camera.position.x < 1 && camera.position.x > -1 ){
 
       homepage.style.display = "";
