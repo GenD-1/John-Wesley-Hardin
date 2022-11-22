@@ -1,6 +1,7 @@
 
 (function () {
   
+  //stats.js to check performance
   javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
 
   // Set our main variables
@@ -126,7 +127,7 @@
       saloon.scale.set(.2, .2, .2)
       saloon.position.x = -70;
       saloon.position.y = -11;
-      saloon.position.z = -12;
+      saloon.position.z = -20;
       saloon.rotation.y = Math.PI / 2;
       scene.add(saloon);
 
@@ -370,7 +371,7 @@
   rightpage = document.querySelector('#pageright')
   leftpage = document.querySelector('#pageleft')
 
-  //Renderer & Animation?
+  //Renderer & Animation
   function update() {
    
     /**
@@ -456,18 +457,19 @@
     var intersects = raycaster.intersectObjects(scene.children, true);
     // console.log(scene.children)
 
-    if (intersects[0]) {
-      var object = intersects[0].object;
-      console.log(intersects[0].point);
+    //This if statement plays a new animation when hardin is clicked
+    // if (intersects[0]) {
+    //   var object = intersects[0].object;
+    //   console.log(intersects[0].point);
 
-      if (object.name === '') {
+    //   if (object.name === '') {
 
-        if (!currentlyAnimating) {
-          currentlyAnimating = true;
-          playOnClick();
-        }
-      }
-    }
+    //     if (!currentlyAnimating) {
+    //       currentlyAnimating = true;
+    //       playOnClick();
+    //     }
+    //   }
+    // }
   }
   function playOnClick() {
     let anim = Math.floor(Math.random() * possibleAnims.length) + 0;
