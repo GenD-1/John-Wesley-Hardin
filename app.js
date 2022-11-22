@@ -127,7 +127,7 @@
       saloon.scale.set(.2, .2, .2)
       saloon.position.x = -70;
       saloon.position.y = -11;
-      saloon.position.z = -20;
+      saloon.position.z = -10;
       saloon.rotation.y = Math.PI / 2;
       scene.add(saloon);
 
@@ -342,7 +342,7 @@
 
 
     // Floor
-    let floorGeometry = new THREE.PlaneGeometry(180, 90, 1, 1);
+    let floorGeometry = new THREE.PlaneGeometry(180, 110, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
       map: texture,
       shininess: 0,
