@@ -1,5 +1,8 @@
 
 (function () {
+  
+  javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
+
   // Set our main variables
   let scene,
     renderer,
@@ -121,7 +124,7 @@
       console.log(gltf)
       saloon = gltf.scene
       saloon.scale.set(.2, .2, .2)
-      saloon.position.x = -35;
+      saloon.position.x = -70;
       saloon.position.y = -11;
       saloon.position.z = -12;
       saloon.rotation.y = Math.PI / 2;
@@ -178,7 +181,7 @@
       // camera.position.x = buttonLeft ? 0 : -30;
       gsap.to(camera.position, {
         duration: 3,
-        x: buttonLeft ? 0 : -30,
+        x: buttonLeft ? 0 : -70,
         // ease: "power3.in"
 
       })
@@ -245,7 +248,7 @@
     buttonR_home.click(() => {
       tl3.to(camera.position, {
         duration: 3,
-        x: buttonHomeright ? -30 : 0,
+        x: buttonHomeright ? -70 : 0,
       })
       buttonHomeright = !buttonHomeright;
     });
@@ -369,6 +372,7 @@
 
   //Renderer & Animation?
   function update() {
+   
     /**
      *     if (camera.position.x >= 30 && camera.position.z < 13) {
 
@@ -411,6 +415,7 @@
       camera.updateProjectionMatrix();
     }
     renderer.render(scene, camera);
+   
     requestAnimationFrame(update);
   }
   update();
@@ -435,6 +440,7 @@
   window.addEventListener('touchend', e => raycast(e, true));
 
   function raycast(e, touch = false) {
+    
     var mouse = {};
     if (touch) {
       mouse.x = 2 * (e.changedTouches[0].clientX / window.innerWidth) - 1;
@@ -452,7 +458,7 @@
 
     if (intersects[0]) {
       var object = intersects[0].object;
-      // console.log(scene)
+      console.log(intersects[0].point);
 
       if (object.name === '') {
 
