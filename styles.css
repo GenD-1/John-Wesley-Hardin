@@ -119,6 +119,11 @@ body {
   transition: transform 0.3s;
 }
 
+.point.visible .label {
+  transform: scale(1,1);
+}
+
+
 .point .label:hover {
   background-color: rgba(74, 68, 68, 0.793);
 }

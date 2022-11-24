@@ -8,7 +8,8 @@
   let scene,
     renderer,
     camera,
-    model,                              // Our character
+    model, 
+    sceneReady = false,                          // Set to truw when models loaded in. Then tells html info bubbles to load in  
     head,                               // Reference to the head bone in the skeleton
     chest,                               // Reference to the Upperchest bone in the skeleton
     possibleAnims,                      // Animations found in our file
@@ -16,11 +17,14 @@
     idle,                               // Idle, the default state our character returns to
     clock = new THREE.Clock(),          // Used for anims, which run to a clock instead of frame rate 
     currentlyAnimating = false,         // Used to check whether characters neck is being used in another anim
-    raycaster = new THREE.Raycaster(),  // Used to detect the click on our character
+    raycaster = new THREE.Raycaster(),
+    raycaster2 = new THREE.Raycaster(),  // Used to detect the click on our character
     loaderAnim = document.getElementById('js-loader'),
     rightpage,                          //Section element representing HTML elements on rightpage
     homepage,                           //Section element representing HTML elements on leftpage
-    leftpage
+    leftpage,
+    points, 
+    sizes
 
   init();
 
@@ -30,10 +34,7 @@
    * Set the scene  
    */
     const canvas = document.querySelector('#c')
-    // const backgroundColor = textures;
     scene = new THREE.Scene();
-    // scene.background = new THREE.Color(backgroundColor)
-    // scene.fog = new THREE.Fog(0xdeb773, 1, 100)
     const loaders = new THREE.CubeTextureLoader();
     const textures = loaders.load([
       './resources/posx.jpg',
@@ -114,8 +115,12 @@
       undefined, // We don't need this function
       function (error) {
         console.error(error);
-      }
-    );
+      },
+
+      //
+      window.setTimeout(() => {
+        sceneReady = true;
+    }, 3000));
 
     /**
     *Saloon_Model
@@ -152,6 +157,41 @@
     // info.position.y = 5;
 
 
+
+
+    /**
+ * Points of interest
+ */
+
+
+ points = [
+    //Recommends adding to dat.gui
+    {
+      //Poker table
+        position: new THREE.Vector3(-56, 3, -10),
+        element: document.querySelector('.point-1')
+    }, 
+    {
+      //Piano
+        position: new THREE.Vector3(-67.9, 3, -29.5),
+        element: document.querySelector('.point-2')
+    }, 
+    {//Bar
+        position: new THREE.Vector3(-87.7, 3, -9.2),
+        element: document.querySelector('.point-3')
+    }
+]
+
+/**
+ * Sizes
+ */
+  sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight
+}
+
+
+
     /**
        * Camera_Default
        */
@@ -165,10 +205,6 @@
     camera.position.z = 32;
     camera.position.x = 0;
     camera.position.y = -3;
-    //Placement camera for model edits
-    // camera.position.z = 50;
-    // camera.position.x = 0;
-    // camera.position.y = -3;
 
 
     /**
@@ -255,50 +291,6 @@
     });
 
 
-
-    //ShowHide--- ButtonHome
-    // const toggleR = document.querySelector('.buttonRight')
-    // const toggleL = document.querySelector('.buttonLeft')
-
-    //ShowHide--- RightButton
-    // toggleR.addEventListener('click', () => {
-    //   if (homepage.style.display === 'none') {
-    //     homepage.style.display = 'block';
-    //   } else {
-    //     homepage.style.display = 'none';
-    //   }
-    // })
-    //ShowHide--- LeftButton
-    // toggleL.addEventListener('click', () => {
-    //   if (homepage.style.display === 'none') {
-    //     homepage.style.display = 'block';
-    //   } else {
-    //     homepage.style.display = 'none';
-    //   }
-    // })
-
-    // ShowHide-- - HomeButton
-    // const toggleR_home = document.querySelector('.buttonHomeright')
-    // const rightbutton_home = document.querySelector('.buttonHomeright')
-    // toggleR.addEventListener('click', () => {
-    //   if (rightbutton_home.style.display === 'none') {
-    //     rightbutton_home.style.display = 'block';
-    //   } else {
-    //     rightbutton_home.style.display = 'none';
-    //   }
-    // })
-    // const leftbutton_home = document.querySelector('.buttonHomeleft')
-    // toggleL.addEventListener('click', () => {
-    //   if (leftbutton_home.style.display === 'none') {
-    //     leftbutton_home.style.display = 'block';
-    //   } else {
-    //     leftbutton_home.style.display = 'none';
-    //   }
-    // })
-
-
-
-
     /**
    *Lighting
    */
@@ -339,8 +331,6 @@
     image.src = "./resources/floor_wood.jpg"
 
 
-
-
     // Floor
     let floorGeometry = new THREE.PlaneGeometry(180, 110, 1, 1);
     let floorMaterial = new THREE.MeshPhongMaterial({
@@ -356,12 +346,6 @@
     floor.position.y = -11;
     floor.position.z = 8;
     scene.add(floor);
-
-    let floor2 = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor2.rotation.x = -Math.PI / 2
-    // scene.add(floor2)
-
-
   }
 
   /**
@@ -415,6 +399,50 @@
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
     }
+    if(sceneReady){
+
+      //update the points elements on each frame in the tick function
+       for(const point of points) {
+           //Get the 2D screen position of the 3D scene position of the points
+           //First clone the vector 3 from the point object. 
+           const screenPosition = point.position.clone()
+           //.project method takes the vector 3 returns normalized value between -1,1 for both x and y values
+           //-1 being left side of the screen for x or the bottom for y. 1 being the right for x or top for y.  
+           screenPosition.project(camera)
+           //instead of using the mouse, we are plugging in the 2D normalized points. Sooo the ray caster is going to laser out to that point on the screen.
+           raycaster2.setFromCamera(screenPosition, camera)
+           //get an array of objects that intersect the laser.  
+           const intersects = raycaster2.intersectObjects(scene.children, true)
+   
+   
+           //show the point if there are no intersections
+           if(intersects.length=== 0){
+               point.element.classList.add('visible')
+           }
+           else{
+               const intersectionDistance =intersects[0].distance
+               const pointDistance = point.position.distanceTo(camera.position)
+               // 
+   
+               if(intersectionDistance < pointDistance) {
+                   point.element.classList.remove('visible')
+               }
+               else {
+                   point.element.classList.add('visible')
+               }
+           }
+   
+           //test the distance
+           const translateX = screenPosition.x * sizes.width / 2; 
+           const translateY = - screenPosition.y * sizes.height / 2; 
+   
+            point.element.style.transform = `translate(${translateX}px, ${translateY}px)`
+   
+   
+           //Change to pixel coordinates. It is currently normalized from -1,1. 
+   
+       }
+      }
     renderer.render(scene, camera);
    
     requestAnimationFrame(update);
@@ -455,6 +483,7 @@
 
     // calculate objects intersecting the picking ray
     var intersects = raycaster.intersectObjects(scene.children, true);
+    console.log(intersects[0].point)
     // console.log(scene.children)
 
     //This if statement plays a new animation when hardin is clicked
